@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fake News Detector | MSC Project</title>
+    <style>
+        body { font-family: Arial; text-align: center; padding: 50px; background: #f2f2f2; }
+       .box { background: white; padding: 30px; border-radius: 10px; width: 60%; margin: auto; box-shadow: 0 0 10px gray; }
+        textarea { width: 90%; height: 100px; padding: 10px; font-size: 16px; }
+        button { padding: 10px 20px; font-size: 18px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        footer { margin-top: 20px; font-size: 14px; color: gray; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>📰 Fake News Detector</h1>
+        <p>AI Powered System to detect Fake vs Real News</p>
+        <form action="/predict" method="POST">
+            <textarea name="news" placeholder="News ikkada paste chey..." required>{{ news }}</textarea><br><br>
+            <button type="submit">Check News</button>
+        </form>
+        {% if prediction_text %}
+            <h2 style="margin-top: 20px;">{{ prediction_text }}</h2>
+            <p><b>You entered:</b> {{ news }}</p>
+        {% endif %}
+        <hr>
+        <footer>
+            <b>Developed by: Narasimha Rao Killi</b><br>
+            © 2026 Narasimha Rao Killi. All Rights Reserved.<br>
+            M.Sc Project | National Sanskrit University, Tirupati
+        </footer>
+    </div>
+</body>
+</html>
