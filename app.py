@@ -1,37 +1,51 @@
-from flask import Flask, render_template, request
+import streamlit as st
 import pandas as pd
+import gdown
+from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
 
-app = Flask(__name__)
+st.set_page_config(page_title="Fake News Detector", layout="centered")
 
-print("AI Model train avthondi...")
-fake = pd.read_csv('Fake.csv')
-real = pd.read_csv('real.csv')
-fake['label'] = 0
-real['label'] = 1
-df = pd.concat([fake, real])
-df = df.sample(frac=1).reset_index(drop=True)
+FAKE_URL = "https://drive.google.com/uc?id=1QGrDaL88OVGrwTBRXfJcJzWGqDuYuB8D"
+REAL_URL = "https://drive.google.com/uc?id=1RaLax4cnSZBsa2z2nwRj8SX69M6cWm3-"
 
-X = df['title']
-y = df['label']
-vectorizer = TfidfVectorizer(stop_words='english', max_df=0.7)
-X_tfidf = vectorizer.fit_transform(X)
-model = LogisticRegression(max_iter=1000)
-model.fit(X_tfidf, y)
-print("AI Model ready!")
+@st.cache_data
+def load_data():
+    st.write("⏳ Downloading dataset from Google Drive...")
+    gdown.download(FAKE_URL, "Fake.csv", quiet=False)
+    gdown.download(REAL_URL, "real.csv", quiet=False)
+    fake = pd.read_csv("Fake.csv")
+    real = pd.read_csv("real.csv")
+    fake["label"] = 0
+    real["label"] = 1
+    df = pd.concat([fake, real])
+    df = df[["title", "text", "label"]].fillna("")
+    df["content"] = df["title"] + " " + df["text"]
+    return df
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+@st.cache_resource
+def train_model(df):
+    st.write("🧠 Training model...")
+    X = df["content"]
+    y = df["label"]
+    vectorizer = TfidfVectorizer(stop_words="english", max_df=0.7)
+    X_vec = vectorizer.fit_transform(X)
+    X_train, X_test, y_train, y_test = train_test_split(X_vec, y, test_size=0.2)
+    model = LogisticRegression(max_iter=200)
+    model.fit(X_train, y_train)
+    acc = accuracy_score(y_test, model.predict(X_test))
+    return model, vectorizer, acc
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    news = request.form['news']
-    news_tfidf = vectorizer.transform([news]) # [news] important
-    prediction = model.predict(news_tfidf)[0]
-    result = "✅ REAL NEWS" if prediction == 1 else "❌ FAKE NEWS"
-    return render_template('index.html', prediction_text=result, news=news)
+st.title("📰 Fake News Detector")
+df = load_data()
+model, vectorizer, acc = train_model(df)
+st.success(f"✅ Model Ready! Accuracy: {acc*100:.2f}%")
 
-if __name__ == '__main__':
-    app.run(debug=True)
+news_input = st.text_area("News text ikkada paste chey:")
+if st.button("Check News"):
+    if news_input:
+        vec = vectorizer.transform([news_input])
+        pred = model.predict(vec)[0]
+        st.success("✅ REAL news") if pred == 1 else st.error("❌ FAKE news")
