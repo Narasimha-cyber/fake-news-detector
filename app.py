@@ -5,7 +5,7 @@ st.set_page_config(page_title="VERIFACT", page_icon="📰", layout="centered")
 
 # Iddi kothaga add chey - Logo show cheyyadaniki
 logo = Image.open("logo.png")
-st.image(logo, width=300)
+st.image(logo, width=100)
 
 st.title("📰 VERIFACT")
 st.write("**Don't believe everything you read - Verify it with AI!**")
