@@ -1,3 +1,15 @@
+<p align="center">
+  <img src="https://via.placeholder.com/800x200/0A1128/00F5D4?text=VERIFACT" alt="VERIFACT Banner"/>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-Live-brightgreen"/>
+  <img src="https://img.shields.io/badge/AI-ML-blue"/>
+  <img src="https://img.shields.io/badge/Deployed-Render-orange"/>
+  <img src="https://img.shields.io/badge/Made%20By-Narasimha%20Rao-purple"/>
+</p>
+
+---
 # 📰 VERIFACT
 ### AI-Powered Live Web Application for Fake News Detection
 
