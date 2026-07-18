@@ -12,7 +12,7 @@
 ---
 # 📰 VERIFACT
 ### AI-Powered Live Web Application for Fake News Detection
-
+**Don't believe everything you read - Verify it with AI!**
 **VERIFACT** is a real-time web application that uses Machine Learning to detect whether a news article is **Real** or **Fake**.  
 Built with Streamlit and deployed on Render.
 
