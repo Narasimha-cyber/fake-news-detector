@@ -1,10 +1,13 @@
 import streamlit as st
+
+st.set_page_config(page_title="VERIFACT", page_icon="📰", layout="centered")
+st.title("📰 VERIFACT")
+st.write("**Don't believe everything you read - Verify it with AI!**")
 import pandas as pd
 from io import StringIO
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 
-st.title("📰 VERIFACT")
 st.markdown("### AI-Powered Live Web Application for Fake News Detection")
 st.markdown("### Made by: **Narasimha Rao Killi**")
 st.markdown("#### **National Sanskrit University, Tirupati**")
