@@ -1,54 +1,21 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Narasimha-cyber/fake-news-detector/main/logo.png" alt="VERIFACT Logo" width="500"/>
-</p>
+# Verifact - Fake News Detector
+**Made by Narasimha Rao Killi**
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Status-Live-brightgreen"/>
-  <img src="https://img.shields.io/badge/AI-ML-blue"/>
-  <img src="https://img.shields.io/badge/Deployed-Render-orange"/>
-  <img src="https://img.shields.io/badge/Made%20By-Narasimha%20Rao-purple"/>
-</p>
+An AI-powered tool to detect fake news using Python, ML and Streamlit.
 
----
-# 📰 VERIFACT
-### AI-Powered Live Web Application for Fake News Detection
-**Don't believe everything you read - Verify it with AI!**
-**VERIFACT** is a real-time web application that uses Machine Learning to detect whether a news article is **Real** or **Fake**.  
-Built with Streamlit and deployed on Render.
+## Live Demo
+[Click here to try Verifact](https://fake-news-detector-ir8c.onrender.com)
 
----
+## Tech Stack
+- Python
+- Streamlit
+- Machine Learning - TF-IDF + Logistic Regression
+- Deployed on Render
 
-## 👨‍💻 Developed By
-**Narasimha Rao Killi**  
-**National Sanskrit University, Tirupati**
+## How it works
+1. Enter any news text
+2. Verifact analyzes it using ML model
+3. Shows if the news is Real or Fake with confidence score
 
 ---
-
-## 🚀 Live Demo
-[Click here to access VERIFACT](https://fake-news-detector-ir8c.onrender.com)
-
----
-
-## ✨ Features
-- **Instant Prediction**: Paste any news text and get result in 2 seconds
-- **ML Powered**: Trained on real-world news datasets
-- **Clean UI**: Simple and user-friendly interface
-- **Live Deployment**: 24/7 accessible online
-
----
-
-## 🛠️ Tech Stack
-- **Frontend**: Streamlit
-- **Backend**: Python, Scikit-learn
-- **Deployment**: GitHub + Render
-- **Model**: TF-IDF + Logistic Regression
-
----
-
-## 📌 How to Use
-1. Open the VERIFACT website
-2. Paste the news article text in the input box
-3. Click on `Verify` button
-4. Get instant result: `REAL` or `FAKE`
-
---- 
+⭐ Built for portfolio by Narasimha Rao Killi
