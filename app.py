@@ -2,7 +2,7 @@ import streamlit as st
 from PIL import Image  # ee line kothaga add chey
 
 st.set_page_config(page_title="VERIFACT", page_icon="📰", layout="centered")
-
+st.components.v1.html('<meta name="google-site-verification" content="hO9BqD-mx6i5iv3UcL-7bVITxfSs_-NvheHkk0q7MIw" />')
 # Iddi kothaga add chey - Logo show cheyyadaniki
 logo = Image.open("logo.png")
 st.image(logo, width=100)
