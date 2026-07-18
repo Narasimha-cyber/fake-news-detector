@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.png" alt="VERIFACT Logo" width="500"/>
+  <img src="./logo.png" alt="VERIFACT Logo" width="500"/>
 </p>
 
 <p align="center">
