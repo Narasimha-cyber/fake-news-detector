@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./logo.png" alt="VERIFACT Logo" width="500"/>
+  <img src="https://raw.githubusercontent.com/Narasimha-cyber/fake-news-detector/main/logo.png" alt="VERIFACT Logo" width="500"/>
 </p>
 
 <p align="center">
