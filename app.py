@@ -4,7 +4,8 @@ from io import StringIO
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 
-st.title("📰 Fake News Detector - LIVE")
+st.title("📰 VERIFACT")
+st.markdown("### AI-Powered Live Web Application for Fake News Detection")
 st.markdown("### Made by: **Narasimha Rao Killi**")
 st.markdown("#### **National Sanskrit University, Tirupati**")
 
