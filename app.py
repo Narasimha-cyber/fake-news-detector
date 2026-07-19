@@ -1,9 +1,8 @@
 import streamlit as st
-from PIL import Image # ee line kothaga add chey
 
-st.set_page_config(page_title="VERIFACT", page_icon="🛡️", layout="centered")
+st.set_page_config(page_title="VERIFACT", page_icon="logo.png", layout="centered")
 
-# ===== NEW THEME CSS START =====
+# ===== VERIFACT THEME + WATERMARK CSS =====
 st.markdown("""
 <style>
     .stApp {
@@ -13,7 +12,7 @@ st.markdown("""
     h1, h2, h3, h4, h5, h6 {
         color: #00D4FF !important;
     }
-    p, div, span {
+    p, div, span, label {
         color: #E5E7EB;
     }
     .stButton>button {
@@ -22,6 +21,7 @@ st.markdown("""
         border-radius: 8px;
         border: 1px solid #00D4FF;
         font-weight: bold;
+        transition: 0.3s;
     }
     .stButton>button:hover {
         background-color: #00D4FF;
@@ -37,13 +37,36 @@ st.markdown("""
         background-color: #1F2937;
         border: 1px solid #00D4FF;
     }
+
+    /* ===== WATERMARK LOGO BACKSIDE ===== */
+    body {
+        position: relative;
+    }
+    body::before {
+        content: "";
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 500px;
+        height: 500px;
+        background-image: url("logo.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        opacity: 0.06; /* light watermark. 0.1 cheste konchem clear */
+        z-index: -1;
+        pointer-events: none;
+    }
 </style>
 """, unsafe_allow_html=True)
-# ===== NEW THEME CSS END =====
+# ===== CSS END =====
 
-# Iddi kothaga add chey - Logo show cheyyadaniki
-logo = Image.open("logo.png")
-st.image(logo, width=180)
+
+# Ikkada nunchi nee original VERIFACT code start avvali
+# st.title("VERIFACT")
+# st.write("Don't believe everything you read...")
+
+
 
 
 st.components.v1.html('<meta name="google-site-verification" content="hO9BqD-mx6i5iv3UcL-7bVITxfSs_-NvheHkk0q7MIw" />')
