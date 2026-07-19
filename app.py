@@ -1,6 +1,7 @@
 import streamlit as st
 from PIL import Image
 import re
+import pickle
 from youtube_transcript_api import YouTubeTranscriptApi
 
 st.set_page_config(page_title="VERIFACT", page_icon="logo.png", layout="centered")
@@ -98,6 +99,15 @@ if st.button("Verify News"):
         with st.spinner("Verifying news..."):
             import time, random
             time.sleep(1)
+            # Load the trained 44k model
+            try:
+              model = pickle.load(open('model_44k.pkl', 'rb'))
+              vectorizer = pickle.load(open('vectorizer_44k.pkl', 'rb'))
+            except FileNotFoundError:
+              st.error("model_44k.pkl and vectorizer_44k.pkl files not found. Upload them to GitHub first.")
+              st.stop()
+            text_tfidf = vectorizer.transform([user_input])
+            prediction = model.predict(text_tfidf)
             if "youtube.com" in user_input or "youtu.be" in user_input:
                 st.info("YouTube link detect chesam... transcript teesthunna ⏳")
                 text = get_youtube_text(user_input)
