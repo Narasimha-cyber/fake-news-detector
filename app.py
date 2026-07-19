@@ -1,4 +1,5 @@
 import streamlit as st
+import base64  # <-- KOTTHA LINE IDI ADD CHEY
 from PIL import Image
 
 st.set_page_config(page_title="VERIFACT", page_icon="logo.png", layout="centered")
@@ -37,29 +38,39 @@ st.markdown("""
         background-color: #1F2937;
         border: 1px solid #00D4FF;
     }
-    
-/* ===== WATERMARK LOGO BACKSIDE ===== */
-    .watermark {
+ # ===== WATERMARK BACKGROUND =====
+def get_base64_of_bin_file(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+logo_base64 = get_base64_of_bin_file("logo.png")
+
+st.markdown(
+    f"""
+    <style>
+    .watermark {{
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 500px;
-        height: 500px;
-        background-image: url("logo.png");
+        width: 550px;
+        height: 550px;
+        background-image: url("data:image/png;base64,{logo_base64}");
         background-size: contain;
         background-repeat: no-repeat;
-        opacity: 0.05;
+        opacity: 0.04;
         z-index: -1;
         pointer-events: none;
-    }
-   
-</style>
-""", unsafe_allow_html=True)
-# ===== CSS END =====
+    }}
+    </style>
+    <div class="watermark"></div>
+    """,
+    unsafe_allow_html=True
+)   
 
-# ===== APP CONTENT WITH LOGO =====
-st.markdown('<div class="watermark"></div>', unsafe_allow_html=True) # <-- IDI KOTTHA LINE
+
+# ===== CSS END =====
 
 col1, col2 = st.columns([1,5])
 
