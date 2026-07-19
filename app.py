@@ -1,5 +1,7 @@
 import streamlit as st
 from PIL import Image
+import re
+from youtube_transcript_api import YouTubeTranscriptApi
 
 st.set_page_config(page_title="VERIFACT", page_icon="logo.png", layout="centered")
 
@@ -71,28 +73,46 @@ st.subheader("Don't believe everything you read. Verify it.")
 
 user_input = st.text_area("Enter news text here:", height=200, placeholder="Paste news article or headline...")
 
+def get_youtube_text(url):
+    try:
+        video_id = re.findall(r"(?:v=|\/)([0-9A-Za-z_-]{11}).*", url)[0]
+        transcript = YouTubeTranscriptApi.get_transcript(video_id)
+        text = " ".join([i['text'] for i in transcript])
+        return text
+    except:
+        return "Could not get YouTube transcript. Video ki captions untey matrame work avthadi"
+
 if st.button("Verify News"):
-    if user_input.strip() == "":
-        st.warning("⚠️ Please enter some news text first!")
+    if not user_input.strip():
+        st.warning("⚠️ Please enter some news text or YouTube link first!")
     else:
         with st.spinner("Verifying news..."):
             import time, random
-            time.sleep(2)
-            
-            text = user_input.lower()
-            
+            time.sleep(1)
+
+            if "youtube.com" in user_input or "youtu.be" in user_input:
+                st.info("YouTube link detect chesam... transcript teesthunna ⏳")
+                text = get_youtube_text(user_input)
+            else:
+                text = user_input.lower()
+
             # Fake indicators
-            fake_keywords = ['breaking', 'shocking', 'viral', 'share now', 'forward to 10 people', 
-                             'government hiding', 'doctors hate this', 'miracle cure', 'you wont believe']
-            
-            # Real indicators  
-            real_keywords = ['according to', 'study', 'research', 'official', 'reported', 'source', 
-                             'data', 'survey', 'ministry', 'who', 'un', 'reuters', 'pti']
-            
+            fake_keywords = ['breaking', 'shocking', 'viral', 'share now', 'forward to 10 people',
+                            'government hiding', 'doctors hate this', 'miracle cure', 'you wont believe']
+            # Real indicators
+            real_keywords = ['according to', 'study', 'research', 'official', 'reported', 'source',
+                            'data', 'survey', 'ministry', 'who', 'un', 'reuters', 'pti']
+
             fake_count = sum(1 for word in fake_keywords if word in text)
             real_count = sum(1 for word in real_keywords if word in text)
-            
             score = real_count - fake_count
+
+            if score < 0: # Fake ekkuva
+                st.error(f"❌ FAKE NEWS - Score: {score}")
+            elif score > 0: # Real ekkuva
+                st.success(f"✅ REAL NEWS - Score: {score}")
+            else:
+                st.warning(f"🤔 UNCERTAIN - Score: {score}")
             
             if score < 0: # Fake ekkuva
                 confidence = random.randint(85, 95)
