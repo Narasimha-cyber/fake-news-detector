@@ -47,22 +47,22 @@ def get_base64_of_bin_file(bin_file):
 logo_base64 = get_base64_of_bin_file("logo.png")
 
 st.markdown(
-    f"""
+    """
     <style>
-    .watermark {{
+    .watermark {
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         width: 550px;
         height: 550px;
-        background-image: url("data:image/png;base64,{logo_base64}");
+        background-image: url("data:image/png;base64,""" + logo_base64 + """");
         background-size: contain;
         background-repeat: no-repeat;
-        opacity: 0.04;
+        opacity: 0.08;
         z-index: -1;
         pointer-events: none;
-    }}
+    }
     </style>
     <div class="watermark"></div>
     """,
