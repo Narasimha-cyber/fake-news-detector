@@ -98,14 +98,13 @@ if st.button("Verify News"):
         with st.spinner("Verifying news..."):
             import time, random
             time.sleep(1)
-
             if "youtube.com" in user_input or "youtu.be" in user_input:
                 st.info("YouTube link detect chesam... transcript teesthunna ⏳")
                 text = get_youtube_text(user_input)
-                elif "instagram.com" in user_input:
-                   st.info("Instagram link detect chesam... caption teesthunna ⏳")
-                   text = get_insta_text(user_input)
-                else:
+            elif "instagram.com" in user_input:
+                st.info("Instagram link detect chesam... caption teesthunna ⏳")
+                text = get_insta_text(user_input)
+            else:
                 text = user_input.lower()
 
             # Fake indicators
