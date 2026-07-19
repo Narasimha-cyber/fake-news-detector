@@ -1,8 +1,8 @@
 import streamlit as st
 
-st.set_page_config(page_title="VERIFACT", page_icon="logo.png", layout="centered")
+st.set_page_config(page_title="VERIFACT", layout="centered")
 
-# ===== VERIFACT THEME + WATERMARK CSS =====
+# ===== THEME CSS - NO WATERMARK, NO LOGO =====
 st.markdown("""
 <style>
     .stApp {
@@ -36,32 +36,12 @@ st.markdown("""
         background-color: #1F2937;
         border: 1px solid #00D4FF;
     }
-
-    /* ===== WATERMARK LOGO BACKSIDE ===== */
-    body {
-        position: relative;
-    }
-    body::before {
-        content: "";
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 500px;
-        height: 500px;
-        background-image: url("logo.png");
-        background-size: contain;
-        background-repeat: no-repeat;
-        opacity: 0.06;
-        z-index: -1;
-        pointer-events: none;
-    }
 </style>
 """, unsafe_allow_html=True)
 # ===== CSS END =====
 
 
-# ===== APP CONTENT START =====
+# ===== APP CONTENT =====
 st.title("VERIFACT 🛡️")
 st.subheader("Don't believe everything you read. Verify it.")
 
@@ -70,8 +50,7 @@ user_input = st.text_area("Enter news text here:", height=200, placeholder="Past
 if st.button("Verify News"):
     if user_input:
         with st.spinner("Analyzing..."):
-            # Nee ML model code ikkada pettu
-            # Ippatiki demo kosam:
+            # Demo logic - ippatiki
             if "fake" in user_input.lower():
                 st.error("Result: FAKE") 
                 st.write("Confidence: 88%")
@@ -80,4 +59,3 @@ if st.button("Verify News"):
                 st.write("Confidence: 92%")
     else:
         st.warning("Please enter some text to verify.")
-# ===== APP CONTENT END =====
