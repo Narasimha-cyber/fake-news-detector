@@ -38,7 +38,7 @@ st.markdown("""
         background-color: #1F2937;
         border: 1px solid #00D4FF;
     }
- # ===== WATERMARK BACKGROUND =====
+# ===== WATERMARK BACKGROUND =====
 def get_base64_of_bin_file(bin_file):
     with open(bin_file, 'rb') as f:
         data = f.read()
@@ -67,8 +67,7 @@ st.markdown(
     <div class="watermark"></div>
     """,
     unsafe_allow_html=True
-)   
-
+)
 
 # ===== CSS END =====
 
