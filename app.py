@@ -37,10 +37,9 @@ st.markdown("""
         background-color: #1F2937;
         border: 1px solid #00D4FF;
     }
-
-    /* ===== WATERMARK LOGO BACKSIDE ===== */
-    body::before {
-        content: "";
+    
+/* ===== WATERMARK LOGO BACKSIDE ===== */
+    .watermark {
         position: fixed;
         top: 50%;
         left: 50%;
@@ -50,17 +49,20 @@ st.markdown("""
         background-image: url("logo.png");
         background-size: contain;
         background-repeat: no-repeat;
-        opacity: 0.06;
+        opacity: 0.05;
         z-index: -1;
         pointer-events: none;
     }
+   
 </style>
 """, unsafe_allow_html=True)
 # ===== CSS END =====
 
-
 # ===== APP CONTENT WITH LOGO =====
+st.markdown('<div class="watermark"></div>', unsafe_allow_html=True) # <-- IDI KOTTHA LINE
+
 col1, col2 = st.columns([1,5])
+
 with col1:
     logo = Image.open("logo.png")
     st.image(logo, width=80)
