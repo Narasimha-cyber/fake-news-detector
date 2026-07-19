@@ -108,45 +108,17 @@ if st.button("Verify News"):
               st.stop()
             text_tfidf = vectorizer.transform([user_input])
             prediction = model.predict(text_tfidf)
-            if "youtube.com" in user_input or "youtu.be" in user_input:
-                st.info("YouTube link detect chesam... transcript teesthunna ⏳")
-                text = get_youtube_text(user_input)
-            elif "instagram.com" in user_input:
-                st.info("Instagram link detect chesam... caption teesthunna ⏳")
-                text = get_insta_text(user_input)
+          
+            # Get probability for confidence
+            proba = model.predict_proba(text_tfidf)[0]
+            confidence = max(proba) * 100
+
+            # Model result ni chupinchu
+            if prediction[0] == 1:
+               st.success(f"✅ REAL NEWS - Confidence: {confidence:.2f}%")
             else:
-                text = user_input.lower()
+               st.error(f"❌ FAKE NEWS - Confidence: {confidence:.2f}%")
 
-            # Fake indicators
-            fake_keywords = ['breaking', 'shocking', 'viral', 'share now', 'forward to 10 people',
-                            'government hiding', 'doctors hate this', 'miracle cure', 'you wont believe']
-            # Real indicators
-            real_keywords = ['according to', 'study', 'research', 'official', 'reported', 'source',
-                            'data', 'survey', 'ministry', 'who', 'un', 'reuters', 'pti']
+                # Kindhaki unna fake_keywords, real_keywords anni delete chey
 
-            fake_count = sum(1 for word in fake_keywords if word in text)
-            real_count = sum(1 for word in real_keywords if word in text)
-            score = real_count - fake_count
-
-            if score < 0: # Fake ekkuva
-                st.error(f"❌ FAKE NEWS - Score: {score}")
-            elif score > 0: # Real ekkuva
-                st.success(f"✅ REAL NEWS - Score: {score}")
-            else:
-                st.warning(f"🤔 UNCERTAIN - Score: {score}")
-            
-            if score < 0: # Fake ekkuva
-                confidence = random.randint(85, 95)
-                st.error(f"🚨 RESULT: FAKE NEWS")
-                st.metric(label="Confidence", value=f"{confidence}%")
-                st.warning("Reason: Contains sensational/clickbait language")
-            elif score > 0: # Real ekkuva
-                confidence = random.randint(88, 96)
-                st.success(f"✅ RESULT: REAL NEWS")
-                st.metric(label="Confidence", value=f"{confidence}%")
-                st.info("Reason: Contains factual and sourced language")
-            else: # Neutral
-                confidence = random.randint(60, 75)
-                st.info(f"🤔 RESULT: UNCLEAR")
-                st.metric(label="Confidence", value=f"{confidence}%")
-                st.warning("Reason: Not enough evidence. Please check source")
+              
