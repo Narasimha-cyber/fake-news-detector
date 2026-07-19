@@ -1,7 +1,51 @@
 import streamlit as st
-from PIL import Image  # ee line kothaga add chey
+from PIL import Image # ee line kothaga add chey
 
-st.set_page_config(page_title="VERIFACT", page_icon="📰", layout="centered")
+st.set_page_config(page_title="VERIFACT", page_icon="🛡️", layout="centered")
+
+# ===== NEW THEME CSS START =====
+st.markdown("""
+<style>
+    .stApp {
+        background: linear-gradient(180deg, #0B1120 0%, #111827 100%);
+        color: #E5E7EB;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: #00D4FF !important;
+    }
+    p, div, span {
+        color: #E5E7EB;
+    }
+    .stButton>button {
+        background-color: #1E3A8A;
+        color: white;
+        border-radius: 8px;
+        border: 1px solid #00D4FF;
+        font-weight: bold;
+    }
+    .stButton>button:hover {
+        background-color: #00D4FF;
+        color: #0B1120;
+    }
+    .stTextArea textarea {
+        background-color: #1F2937;
+        color: #E5E7EB;
+        border: 1px solid #00D4FF;
+        border-radius: 8px;
+    }
+    [data-testid="stAlert"] {
+        background-color: #1F2937;
+        border: 1px solid #00D4FF;
+    }
+</style>
+""", unsafe_allow_html=True)
+# ===== NEW THEME CSS END =====
+
+# Iddi kothaga add chey - Logo show cheyyadaniki
+logo = Image.open("logo.png")
+st.image(logo, width=180)
+
+
 st.components.v1.html('<meta name="google-site-verification" content="hO9BqD-mx6i5iv3UcL-7bVITxfSs_-NvheHkk0q7MIw" />')
 # Iddi kothaga add chey - Logo show cheyyadaniki
 logo = Image.open("logo.png")
