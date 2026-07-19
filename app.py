@@ -81,7 +81,16 @@ def get_youtube_text(url):
         return text
     except:
         return "Could not get YouTube transcript. Video ki captions untey matrame work avthadi"
+import instaloader
 
+def get_insta_text(url):
+    try:
+        L = instaloader.Instaloader()
+        shortcode = url.split("/")[-2]
+        post = instaloader.Post.from_shortcode(L.context, shortcode)
+        return post.caption if post.caption else "No caption found"
+    except:
+        return "Could not get Instagram caption. Post public ga undali"
 if st.button("Verify News"):
     if not user_input.strip():
         st.warning("⚠️ Please enter some news text or YouTube link first!")
@@ -93,7 +102,10 @@ if st.button("Verify News"):
             if "youtube.com" in user_input or "youtu.be" in user_input:
                 st.info("YouTube link detect chesam... transcript teesthunna ⏳")
                 text = get_youtube_text(user_input)
-            else:
+                elif "instagram.com" in user_input:
+                   st.info("Instagram link detect chesam... caption teesthunna ⏳")
+                   text = get_insta_text(user_input)
+                else:
                 text = user_input.lower()
 
             # Fake indicators
