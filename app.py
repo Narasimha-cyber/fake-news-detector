@@ -3,11 +3,10 @@ from PIL import Image
 import re
 import pickle
 from youtube_transcript_api import YouTubeTranscriptApi
-
 st.set_page_config(page_title="VERIFACT", page_icon="logo.png", layout="centered")
 st.markdown('<link rel="manifest" href="manifest.json">', unsafe_allow_html=True)
- with open("manifest.json") as f:
-     st.markdown(f'<link rel="manifest" href="data:application/json,{f.read()}">', unsafe_allow_html=True)
+with open("manifest.json") as f:
+    st.markdown(f'<link rel="manifest" href="data:application/json,{f.read()}">', unsafe_allow_html=True)
 
 # ===== THEME CSS + WATERMARK =====
 st.markdown("""
