@@ -6,6 +6,15 @@ from youtube_transcript_api import YouTubeTranscriptApi
 st.set_page_config(page_title="VERIFACT", page_icon="logo.png", layout="centered")
 import json
 
+# Force Chrome to show Install button
+st.markdown("""
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('data:text/javascript,');
+}
+</script>
+""", unsafe_allow_html=True)
+
 # PWA Manifest serve cheyyadaniki
 manifest = {
     "name": "VERIFACT - Fake News Detector",
@@ -16,8 +25,8 @@ manifest = {
     "theme_color": "#00FFFF",
     "scope": "/",
     "icons": [
-        {"src": "logo.png", "sizes": "192x192", "type": "image/png"},
-        {"src": "logo.png", "sizes": "512x512", "type": "image/png"}
+        {"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
+        {"src": "icon-512.png", "sizes": "512x512", "type": "image/png"}
     ]
 }
 st.markdown(f'<link rel="manifest" href="data:application/json,{json.dumps(manifest)}">', unsafe_allow_html=True)
