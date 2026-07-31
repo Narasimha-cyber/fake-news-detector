@@ -131,8 +131,7 @@ def generate_why_explanation(verdict, user_text):
             "Structure matches verified news articles in training data.",
             "No red flags like ALL CAPS or excessive exclamation found."
         ]
-      return reasons
-
+     return reasons
 
 if st.button("Verify News"):
     if not user_input.strip():
