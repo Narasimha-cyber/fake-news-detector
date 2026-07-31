@@ -126,28 +126,28 @@ def generate_why_explanation(verdict, user_text):
 if st.button("Verify News"):
     if not user_input.strip():
         st.warning("⚠️ Please enter some news text or YouTube link first!")
-    else:
+      else:
         with st.spinner("Verifying news..."):
             import time, random
             time.sleep(1)
             # Load the trained 44k model
             try:
-              model = pickle.load(open('model_44k.pkl', 'rb'))
-              vectorizer = pickle.load(open('vectorizer_44k.pkl', 'rb'))
+                model = pickle.load(open('model_44k.pkl', 'rb'))
+                vectorizer = pickle.load(open('vectorizer_44k.pkl', 'rb'))
             except FileNotFoundError:
-              st.error("model_44k.pkl and vectorizer_44k.pkl files not found. Upload them to GitHub first.")
-              st.stop()
+                st.error("model_44k.pkl and vectorizer_44k.pkl files not found. Upload them to GitHub first.")
+                st.stop()
             text_tfidf = vectorizer.transform([user_input])
             prediction = model.predict(text_tfidf)
-        
-  why_points = generate_why_explanation(verdict, user_input)
+
+            why_points = generate_why_explanation(verdict, user_input) # <- IDHI LOPALA KI VACHINDI
+            
             # Get probability for confidence
             proba = model.predict_proba(text_tfidf)[0]
             confidence = max(proba) * 100
 
-         # Verdict decide cheyyadam
-verdict = "REAL" if prediction[0] == 1 else "FAKE"
-
+        # Verdict decide cheyyadam <- IDHI BAYATA UNDI
+        verdict = "REAL" if prediction[0] == 1 else "FAKE"
 # Score + Verdict
 col1, col2 = st.columns(2)
 col1.metric("Verdict", verdict)
