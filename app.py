@@ -116,7 +116,8 @@ def get_insta_text(url):
         return post.caption if post.caption else "No caption found"
     except:
         return "Could not get Instagram caption. Post public ga undali"
-  def generate_why_explanation(verdict, user_text):
+      
+def generate_why_explanation(verdict, user_text):
     """Simple explanation generator based on prediction"""
     if verdict == "FAKE":
         reasons = [
