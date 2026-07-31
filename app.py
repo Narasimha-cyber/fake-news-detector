@@ -123,7 +123,7 @@ def generate_why_explanation(verdict, user_text):
     else:
         return ["Neutral language undi", "Training data tho match ayindi", "Red flags levu"]
       
-    if st.button("Verify News"):
+if st.button("Verify News"):
         if not user_input.strip():
             st.warning("⚠️ Please enter some news text or YouTube link first!")
         else:
