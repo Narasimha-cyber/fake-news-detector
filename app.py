@@ -118,21 +118,11 @@ def get_insta_text(url):
         return "Could not get Instagram caption. Post public ga undali"
       
 def generate_why_explanation(verdict, user_text):
-    """Simple explanation generator based on prediction"""
     if verdict == "FAKE":
-        reasons = [
-            "The wording contains clickbait and emotional words common in misinformation.",
-            "Key facts in this claim could not be verified with known sources.",
-            "Similar fake claims circulated on WhatsApp and Facebook before."
-        ]
-     else:
-        reasons = [
-            "The claim uses factual, neutral language.",
-            "Structure matches verified news articles in training data.",
-            "No red flags like ALL CAPS or excessive exclamation found."
-        ]
-     return reasons
-
+        return ["Clickbait words unayi", "Facts verify kaledu", "Similar fake news spread ayyindi"]
+    else:
+        return ["Neutral language undi", "Training data tho match ayindi", "Red flags levu"]
+      
 if st.button("Verify News"):
     if not user_input.strip():
         st.warning("⚠️ Please enter some news text or YouTube link first!")
