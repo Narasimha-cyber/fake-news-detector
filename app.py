@@ -127,7 +127,7 @@ def generate_why_explanation(verdict, user_text):
         if not user_input.strip():
             st.warning("⚠️ Please enter some news text or YouTube link first!")
         else:
-        with st.spinner("Verifying news..."):
+         with st.spinner("Verifying news..."):
             import time, random
             time.sleep(1)
             # Load the trained 44k model
