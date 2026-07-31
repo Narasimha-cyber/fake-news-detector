@@ -123,10 +123,10 @@ def generate_why_explanation(verdict, user_text):
     else:
         return ["Neutral language undi", "Training data tho match ayindi", "Red flags levu"]
       
-if st.button("Verify News"):
-    if not user_input.strip():
-        st.warning("⚠️ Please enter some news text or YouTube link first!")
-      else:
+    if st.button("Verify News"):
+        if not user_input.strip():
+            st.warning("⚠️ Please enter some news text or YouTube link first!")
+        else:
         with st.spinner("Verifying news..."):
             import time, random
             time.sleep(1)
@@ -140,30 +140,27 @@ if st.button("Verify News"):
             text_tfidf = vectorizer.transform([user_input])
             prediction = model.predict(text_tfidf)
 
-            why_points = generate_why_explanation(verdict, user_input) # <- IDHI LOPALA KI VACHINDI
+            # Verdict decide cheyyadam <- IDHI LOPALA KI VACHINDI
+            verdict = "REAL" if prediction[0] == 1 else "FAKE"
+
+            why_points = generate_why_explanation(verdict, user_input)
             
             # Get probability for confidence
             proba = model.predict_proba(text_tfidf)[0]
             confidence = max(proba) * 100
 
-        # Verdict decide cheyyadam <- IDHI BAYATA UNDI
-        verdict = "REAL" if prediction[0] == 1 else "FAKE"
-# Score + Verdict
-col1, col2 = st.columns(2)
-col1.metric("Verdict", verdict)
-col2.metric("Confidence Score", f"{confidence:.2f}%")
+        # ====== Spinner aipoyaka ======
+        st.subheader(f"Verdict: {verdict}")
+        st.progress(int(confidence)/100)
 
-# ===== NEW: WHY SECTION =====
-with st.expander("🤔 Why this verdict?"):
-    for i, reason in enumerate(why_points, 1):
-        st.write(f"**{i}.** {reason}")
+        # ====== NEW: WHY SECTION ======
+        with st.expander("🤔 Why this verdict?"):
+            for i, reason in enumerate(why_points, 1):
+                st.write(f"**{i}.** {reason}")
 
-# ===== NEW: SOURCES SECTION =====
-with st.expander("🔗 Sources"):
-    st.info("Note: This model is trained on 44k dataset. For live fact-checking with URLs,")
-    st.write("we need to connect to Google Search API in next update.")
-    st.write("- **Dataset**: 44k Fake News Dataset")
-    st.write("- **Model**: TF-IDF + Logistic Regression")
-
-
-              
+        # ====== NEW: SOURCES SECTION ======
+        with st.expander("📚 Sources"):
+            st.info("Note: This model is trained on 44k dataset. For live fact-checking with URLs,")
+            st.write("we need to connect to Google Search API in next update.")
+            st.write("- **Dataset**: 44k Fake News Dataset")
+            st.write("- **Model**: TF-IDF + Logistic Regression")                     
