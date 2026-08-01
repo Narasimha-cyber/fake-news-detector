@@ -2,16 +2,12 @@ import streamlit as st
 import re
 import pickle
 from youtube_transcript_api import YouTubeTranscriptApi
-import easyocr
-import cv2
-import numpy as np
-
+import pytesseract
+from PIL import Image
 st.set_page_config(page_title="VERIFACT", page_icon="logo.png", layout="centered")
 @st.cache_resource
-def load_reader():
-    return easyocr.Reader(['en'], gpu=False)
-
-reader = load_reader()
+def load_tesseract():
+    return None
 import json
 
 # Force Chrome to show Install button
@@ -193,14 +189,12 @@ st.write("Meme image upload cheyi, text extract chesi fact check cheptha")
 uploaded_file = st.file_uploader("Upload Meme Image", type=["png", "jpg", "jpeg"])
 
 if uploaded_file is not None:
-    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
-    image = cv2.imdecode(file_bytes, 1)
+    image = Image.open(uploaded_file)
     st.image(image, caption="Uploaded Meme", use_column_width=True)
 
     # OCR to extract text
     with st.spinner("Text extract chesthunna..."):
-        results = reader.readtext(image)
-        extracted_text = " ".join([res[1] for res in results])
+        extracted_text = pytesseract.image_to_string(image, lang='eng')
 
     st.success("Extracted Text:")
     st.write(extracted_text)
