@@ -178,4 +178,4 @@ if st.button("Verify News"):
               st.write(f"- **Top Keywords**: {', '.join(user_input.lower().split()[:5])}")
     
 st.info("💡 Next Update: Google Search API add cheste live URL lu kuda vasthayi") 
-st.markdown('<div class="footer">Made with ❤️ by You | Trained on 44k Dataset</div>', unsafe_allow_html=True)
+st.markdown('<div class="footer">Made with ❤️ by Narasimha Rao Killi | Trained on 44k Dataset</div>', unsafe_allow_html=True)
