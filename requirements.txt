@@ -3,8 +3,7 @@
     scikit-learn
     youtube-transcript-api
     instaloader
-    easyocr
+    pytesseract
     pillow
     opencv-python-headless
-    torch
-    torchvision
+    numpy
