@@ -196,14 +196,14 @@ if uploaded_file is not None:
     file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
     image = cv2.imdecode(file_bytes, 1)
     st.image(image, caption="Uploaded Meme", use_column_width=True)
-    
+
     # OCR to extract text
-with st.spinner("Text extract chesthunna..."):
+    with st.spinner("Text extract chesthunna..."):
         results = reader.readtext(image)
         extracted_text = " ".join([res[1] for res in results])
-    
-        st.success("Extracted Text:")
-        st.write(extracted_text)
-    
+
+    st.success("Extracted Text:")
+    st.write(extracted_text)
+
     if st.button("Check Meme Fact"):
-       st.write("Ikkada extracted text ni model tho check cheyali")
+        st.write("Ikkada extracted text ni model tho check cheyali")
