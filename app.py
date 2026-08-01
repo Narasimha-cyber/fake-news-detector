@@ -164,9 +164,9 @@ else:
 st.progress(int(confidence)/100)
 
         # ====== NEW: WHY SECTION ======
-        with st.expander("🤔 Why this verdict?"):
-            for i, reason in enumerate(why_points, 1):
-                st.write(f"**{i}.** {reason}")
+with st.expander("🤔 Why this verdict?"):
+      for i, reason in enumerate(why_points, 1):
+          st.write(f"**{i}.** {reason}")
 
       # ====== NEW: SOURCES SECTION ======
 with st.expander("📚 Sources & Fact Check"):
