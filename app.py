@@ -83,6 +83,9 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+.real-box {background-color: #1a4d2e; padding: 20px; border-radius: 10px; border-left: 5px solid #28a745; margin-top: 10px;}
+.fake-box {background-color: #4d1a1a; padding: 20px; border-radius: 10px; border-left: 5px solid #dc3545; margin-top: 10px;}
+.footer {text-align: center; color: grey; margin-top: 50px; font-size: 12px;}
 # ===== CSS END =====
 
 
@@ -150,17 +153,24 @@ if st.button("Verify News"):
             confidence = max(proba) * 100
 
         # ====== Spinner aipoyaka ======
-        st.subheader(f"Verdict: {verdict}")
-        st.progress(int(confidence)/100)
+if verdict == "REAL":
+    st.markdown(f'<div class="real-box"><h2>✅ Verdict: REAL</h2><p>Confidence: {confidence:.1f}%</p></div>', unsafe_allow_html=True)
+else:
+    st.markdown(f'<div class="fake-box"><h2>❌ Verdict: FAKE</h2><p>Confidence: {confidence:.1f}%</p></div>', unsafe_allow_html=True)
+
+st.progress(int(confidence)/100)
 
         # ====== NEW: WHY SECTION ======
         with st.expander("🤔 Why this verdict?"):
             for i, reason in enumerate(why_points, 1):
                 st.write(f"**{i}.** {reason}")
 
-        # ====== NEW: SOURCES SECTION ======
-        with st.expander("📚 Sources"):
-            st.info("Note: This model is trained on 44k dataset. For live fact-checking with URLs,")
-            st.write("we need to connect to Google Search API in next update.")
-            st.write("- **Dataset**: 44k Fake News Dataset")
-            st.write("- **Model**: TF-IDF + Logistic Regression")                     
+      # ====== NEW: SOURCES SECTION ======
+with st.expander("📚 Sources & Fact Check"):
+    st.write("**Model Info:**")
+    st.write(f"- **Dataset**: 44k Fake News Dataset")
+    st.write(f"- **Model**: TF-IDF + Logistic Regression")
+    st.write(f"- **Top Keywords**: {', '.join(user_input.lower().split()[:5])}")
+    
+    st.info("💡 Next Update: Google Search API add cheste live URL lu kuda vasthayi") 
+  st.markdown('<div class="footer">Made with ❤️ by You | Trained on 44k Dataset</div>', unsafe_allow_html=True)
