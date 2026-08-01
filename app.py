@@ -6,8 +6,10 @@ from youtube_transcript_api import YouTubeTranscriptApi
 import pytesseract
 
 # Tesseract path for Windows
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
-st.set_page_config(page_title="VERIFACT", page_icon="logo.png", layout="centered")
+import os
+if os.name == 'nt': # Windows aithe matrame
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+    st.set_page_config(page_title="VERIFACT", page_icon="logo.png", layout="centered")
 import json
 
 # Force Chrome to show Install button
