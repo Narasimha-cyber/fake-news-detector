@@ -183,3 +183,21 @@ if st.button("Verify News"):
     
 st.info("💡 Next Update: Google Search API add cheste live URL lu kuda vasthayi") 
 st.markdown('<div class="footer">Made with ❤️ by Narasimha Rao Killi | Trained on 44k Dataset</div>', unsafe_allow_html=True)
+st.header("🖼️ MemeFact")
+st.write("Meme image upload cheyi, text extract chesi fact check cheptha")
+
+uploaded_file = st.file_uploader("Upload Meme Image", type=["png", "jpg", "jpeg"])
+
+if uploaded_file is not None:
+    image = Image.open(uploaded_file)
+    st.image(image, caption="Uploaded Meme", use_column_width=True)
+    
+    # OCR to extract text
+    with st.spinner("Text extract chesthunna..."):
+        extracted_text = pytesseract.image_to_string(image)
+    
+    st.success("Extracted Text:")
+    st.write(extracted_text)
+    
+    if st.button("Check Meme Fact"):
+        st.write("Ikkada extracted text ni model tho check cheyali")
