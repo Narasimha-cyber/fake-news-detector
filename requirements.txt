@@ -3,4 +3,5 @@
     scikit-learn
     youtube-transcript-api
     instaloader
-    
+    pytesseract
+    pillow
