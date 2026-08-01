@@ -144,36 +144,38 @@ if st.button("Verify News"):
                 st.error("model_44k.pkl and vectorizer_44k.pkl files not found. Upload them to GitHub first.")
                 st.stop()
             text_tfidf = vectorizer.transform([user_input])
-            prediction = model.predict(text_tfidf)
-
-            # Verdict decide cheyyadam <- IDHI LOPALA KI VACHINDI
-            verdict = "REAL" if prediction[0] == 1 else "FAKE"
-
+            prediction = model.predict(text_tfidf)[0] 
+            
+            # ===== VERDICT DECIDE CHEYADAM =====
+            if prediction == 0:
+            verdict = "REAL"
+            else:
+            verdict = "FAKE"
             why_points = generate_why_explanation(verdict, user_input)
             
             # Get probability for confidence
             proba = model.predict_proba(text_tfidf)[0]
             confidence = max(proba) * 100
+            
+            # ====== Spinner aipoyaka ======
+         if verdict == "REAL":
+            st.markdown(f'<div class="real-box"><h2>✅ Verdict: REAL</h2><p>Confidence: {confidence:.1f}%</p></div>', unsafe_allow_html=True)
+         else:
+            st.markdown(f'<div class="fake-box"><h2>❌ Verdict: FAKE</h2><p>Confidence: {confidence:.1f}%</p></div>', unsafe_allow_html=True)
+            
+         st.progress(int(confidence)/100)
 
-        # ====== Spinner aipoyaka ======
-if verdict == "REAL":
-    st.markdown(f'<div class="real-box"><h2>✅ Verdict: REAL</h2><p>Confidence: {confidence:.1f}%</p></div>', unsafe_allow_html=True)
-else:
-    st.markdown(f'<div class="fake-box"><h2>❌ Verdict: FAKE</h2><p>Confidence: {confidence:.1f}%</p></div>', unsafe_allow_html=True)
+         # ====== NEW: WHY SECTION ======
+         with st.expander("🤔 Why this verdict?"):
+           for i, reason in enumerate(why_points, 1):
+               st.write(f"**{i}.** {reason}")
 
-st.progress(int(confidence)/100)
-
-        # ====== NEW: WHY SECTION ======
-with st.expander("🤔 Why this verdict?"):
-      for i, reason in enumerate(why_points, 1):
-          st.write(f"**{i}.** {reason}")
-
-      # ====== NEW: SOURCES SECTION ======
-with st.expander("📚 Sources & Fact Check"):
-    st.write("**Model Info:**")
-    st.write(f"- **Dataset**: 44k Fake News Dataset")
-    st.write(f"- **Model**: TF-IDF + Logistic Regression")
-    st.write(f"- **Top Keywords**: {', '.join(user_input.lower().split()[:5])}")
+         # ====== NEW: SOURCES SECTION ======
+         with st.expander("📚 Sources & Fact Check"):
+              st.write("**Model Info:**")
+              st.write(f"- **Dataset**: 44k Fake News Dataset")
+              st.write(f"- **Model**: TF-IDF + Logistic Regression")
+              st.write(f"- **Top Keywords**: {', '.join(user_input.lower().split()[:5])}")
     
 st.info("💡 Next Update: Google Search API add cheste live URL lu kuda vasthayi") 
 st.markdown('<div class="footer">Made with ❤️ by You | Trained on 44k Dataset</div>', unsafe_allow_html=True)
