@@ -5,5 +5,4 @@
     instaloader
     pytesseract
     pillow
-    opencv-python-headless
     numpy
