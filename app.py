@@ -148,9 +148,9 @@ if st.button("Verify News"):
             
             # ===== VERDICT DECIDE CHEYADAM =====
             if prediction == 0:
-            verdict = "REAL"
+              verdict = "REAL"
             else:
-            verdict = "FAKE"
+              verdict = "FAKE"
             why_points = generate_why_explanation(verdict, user_input)
             
             # Get probability for confidence
