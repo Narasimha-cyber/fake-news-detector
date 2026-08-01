@@ -81,11 +81,14 @@ st.markdown("""
         z-index: -1;
         pointer-events: none;
     }
-</style>
-""", unsafe_allow_html=True)
+    
+.main {background-color: #f0f2f6;}
 .real-box {background-color: #1a4d2e; padding: 20px; border-radius: 10px; border-left: 5px solid #28a745; margin-top: 10px;}
 .fake-box {background-color: #4d1a1a; padding: 20px; border-radius: 10px; border-left: 5px solid #dc3545; margin-top: 10px;}
 .footer {text-align: center; color: grey; margin-top: 50px; font-size: 12px;}
+</style>
+""", unsafe_allow_html=True)
+
 # ===== CSS END =====
 
 
